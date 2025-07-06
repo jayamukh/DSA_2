@@ -1,20 +1,24 @@
 class Solution {
     public static int findLHS(int[] nums) {
+        Arrays.sort(nums);
 
-     int res = 0;
+     int prev_count = 1, res = 0;
         for (int i = 0; i < nums.length; i++) {
-            int count = 0;
-            boolean flag = false;
-            for (int j = 0; j < nums.length; j++) {
-                if (nums[j] == nums[i])
+            int count = 1;
+            if (i > 0 && nums[i] - nums[i - 1] == 1) {
+                while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
                     count++;
-                else if (nums[j] + 1 == nums[i]) {
-                    count++;
-                    flag = true;
+                    i++;
                 }
+                res = Math.max(res, count + prev_count);
+                prev_count = count;
+            } else {
+                while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
+                    count++;
+                    i++;
+                }
+                prev_count = count;
             }
-            if (flag)
-                res = Math.max(count, res);
         }
         return res;
     }

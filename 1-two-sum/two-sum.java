@@ -8,12 +8,11 @@ class Solution {
             {
                 if(nums[i] + nums[j] == target)
                 {
-                    idx[0] = i;
-                    idx[1] = j;
+                   return new int[] { i, j };
                 }
             }
         }
 
-        return idx;
+         return new int[] {};
     }
 }

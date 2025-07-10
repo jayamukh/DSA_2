@@ -1,18 +1,15 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        //Brute Force
-        int[] idx = new int[2];
-        for(int i = 0; i < nums.length; i++)
-        {
-            for(int j= i+1; j < nums.length; j++)
-            {
-                if(nums[i] + nums[j] == target)
-                {
-                   return new int[] { i, j };
-                }
-            }
-        }
+        //one pass hashtable
+         Map<Integer, Integer> exMap = new HashMap<>();
+         for(int i=0; i < nums.length; i++)
+         {
+            int compliment = target - nums[i];
+            if(exMap.containsKey(compliment))
+                return new int[]{exMap.get(compliment),i};
+            exMap.put(nums[i], i);
+         }
 
-         return new int[] {};
+         return new int[]{};
     }
 }

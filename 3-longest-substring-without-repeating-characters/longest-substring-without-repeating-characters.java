@@ -18,14 +18,14 @@ class Solution {
         */
        //Sliding window
 
-       Map<Character, Integer> chars = new HashMap();
+      Integer[] chars = new Integer[128];
 
        int left = 0;
        int right = 0;
 
        int res = 0;
 
-       while(right < s.length())
+      /* while(right < s.length())
        {
             char r = s.charAt(right);
             chars.put(r, chars.getOrDefault(r,0)+1);
@@ -40,6 +40,20 @@ class Solution {
             res = Math.max(res, right - left +1);
             right++;
             
+       }*/
+
+       while (right < s.length())
+       {
+            char r = s.charAt(right);
+            Integer idx = chars[r];
+            if(idx != null && idx >= left && idx< right)
+            {
+                left = idx+1;
+            }
+            res = Math.max(res, right - left+1);
+            chars[r] = right;
+            right++;
+
        }
        return res; 
     }

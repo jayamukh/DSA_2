@@ -1,6 +1,6 @@
 class Solution {
     public String largestOddNumber(String num) {
-        int len = num.length();
+       /* int len = num.length();
         String res = "";
         StringBuilder sb = new StringBuilder();
         int max = -1;
@@ -19,7 +19,17 @@ class Solution {
             res = num.substring(0, max+1);
         }
 
-        return res;
+        return res;*/
 
+        int len = num.length();
+        for(int i = len-1; i >= 0; i--)
+        { 
+            if(Character.getNumericValue(num.charAt(i)) % 2 !=0)
+            {
+                return num.substring(0, i+1);
+            }
+        }
+        
+        return "";
     }
 }

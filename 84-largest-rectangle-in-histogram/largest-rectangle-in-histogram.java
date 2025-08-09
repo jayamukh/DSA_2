@@ -1,23 +1,25 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
-       Deque<Integer> stack = new ArrayDeque<>();
-        stack.push(-1);
-        int length = heights.length;
+        Deque<Integer> st = new ArrayDeque<>();
+        st.push(-1);
+        int len = heights.length;
         int maxArea = 0;
-        for (int i = 0; i < length; i++) {
-            while (
-                (stack.peek() != -1) && (heights[stack.peek()] >= heights[i])
-            ) {
-                int currentHeight = heights[stack.pop()];
-                int currentWidth = i - stack.peek() - 1;
-                maxArea = Math.max(maxArea, currentHeight * currentWidth);
+        for(int i = 0; i < len; i++)
+        {
+            while((st.peek() != -1) && (heights[st.peek()] >= heights[i]))
+            {
+                int curHt = heights[st.pop()];
+                int curWd = i - st.peek() - 1;
+                maxArea = Math.max(maxArea, curHt * curWd);
             }
-            stack.push(i);
+            st.push(i);
         }
-        while (stack.peek() != -1) {
-            int currentHeight = heights[stack.pop()];
-            int currentWidth = length - stack.peek() - 1;
-            maxArea = Math.max(maxArea, currentHeight * currentWidth);
+
+        while(st.peek() != -1)
+        {
+             int curHt = heights[st.pop()];
+             int curWd = len - st.peek() - 1;
+             maxArea = Math.max(maxArea, curHt * curWd);
         }
         return maxArea;
     }

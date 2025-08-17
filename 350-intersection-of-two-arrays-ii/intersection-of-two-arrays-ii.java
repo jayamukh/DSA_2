@@ -2,7 +2,7 @@ class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
 
         //hashmap approach
-        List<Integer> res = new ArrayList<>();
+        /*List<Integer> res = new ArrayList<>();
 
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -30,7 +30,34 @@ class Solution {
 
         return res.stream()
         .mapToInt(Integer::intValue) // maps Integer objects to primitive int values
-                                  .toArray();
+                                  .toArray();*/
+
+         if(nums1.length > nums2.length)
+         {
+            return intersect(nums2, nums1);
+         }  
+
+         HashMap<Integer, Integer> map = new HashMap<>();
+
+         for(int n : nums1)
+         {
+            map.put(n, map.getOrDefault(n, 0) +  1);
+         }
+
+         int k=0;
+         for(int n:nums2)
+         {
+            int cnt = map.getOrDefault(n,0);
+            if(cnt> 0)
+            {
+                nums1[k++] = n;
+                map.put(n, cnt - 1);
+
+            }
+
+         }
+
+         return Arrays.copyOfRange(nums1,0,k);                       
         
     }
 }
